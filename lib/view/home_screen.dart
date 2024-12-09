@@ -23,7 +23,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final todoController = ref.watch(todoProvider);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -35,6 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 onPressed: () =>
                     ref.read(todoProvider.notifier).addTodo(title: todoTitleController.text.trim()),
               ),
+              const Divider(),
               const ViewTodo(),
             ],
           ),

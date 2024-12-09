@@ -5,6 +5,7 @@ import 'package:test_project/view-model/todo_controller.dart';
 
 class ViewTodo extends ConsumerStatefulWidget {
   const ViewTodo({super.key});
+
   @override
   ConsumerState<ViewTodo> createState() => _ViewTodoState();
 }
@@ -22,11 +23,21 @@ class _ViewTodoState extends ConsumerState<ViewTodo> {
             child: ListTile(
                 leading: CircleAvatar(child: Text(todo.id.toString())),
                 title: Text(todo.title.toString()),
-                trailing: Checkbox(
-                  value: todo.isDone,
-                  onChanged: (value) async {
-                    await ref.read(todoProvider.notifier).updateTodo(todo: todo);
-                  },
+                trailing: SizedBox(
+                  width: 100,
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: todo.isDone,
+                        onChanged: (value) async {
+                          await ref.read(todoProvider.notifier).updateTodo(todo: todo);
+                        },
+                      ),
+                      IconButton(onPressed: () async {
+                        await ref.read(todoProvider.notifier).deleteTodo(todo: todo);
+                      }, icon: Icon(Icons.delete))
+                    ],
+                  ),
                 )),
           );
         },

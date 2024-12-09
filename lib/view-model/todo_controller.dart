@@ -25,4 +25,9 @@ class TodoController extends StateNotifier<TodoGeneric> {
     todo.upsert();
     await getTodos();
   }
+
+  deleteTodo({required Todo todo}) async {
+    await todo.delete();
+    await getTodos();
+  }
 }
